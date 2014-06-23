@@ -1,0 +1,121 @@
+<nav class="navbar navbar-static-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <h1 class="brand">
+                <a href="#">I<i class="fa fa-heart"></i>my city</a>
+            </h1>
+            <ul class="nav navbar-nav">
+                <li ng-class="{active: isActive('/main')}">
+                    <a href="#">Accueil</a>
+                </li>
+                <li ng-class="{active: isActive('/about')}">
+                    <a href="#/apropos">A propos</a>
+                </li>
+                <li ng-class="{active: isActive('/contact')}">
+                    <a href="#/contact">Contact</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<header class="home shadow-inset" style="background-image:url({{city_picture}});" id="header">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-6 col-md-offset-3 col-xs-12">
+                <h2 ng-bing="city.city_name" class="text-shadow">{{city_name}}</h2>
+                <p class="small text-shadow">{{city_text}}</p>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div class="main">
+    <div class="container">
+
+        <!-- Post message Form -->
+        <div class="row top-actions">
+            <div class="col-md-6 col-sm-6">
+                <button class="btn" ng-click="isCollapsed = !isCollapsed">
+                    <i class="fa fa-caret-right"></i>&nbsp;Poster votre message.
+                </button>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <select class="btn" ng-model="order_message">
+                    <option value="message_date">Ordre croissant</option>
+                    <option value="-message_date">Ordre décroissant</option>
+                </select>
+            </div>
+        </div>
+        <div id="postMsg" class="collapse postMsg row" collapse="isCollapsed">
+            <div class="col-md-12">
+                <div class="row alerts errors">
+                    <div class="col-md-12">
+                        <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+                    </div>
+                </div>
+                <form method="post" action="" class="form-horizontal" role="form" name="messageForm">
+                    <div class="row">
+                        <div class="input-group col-md-6 col-md-offset-3 col-sm-6 col-xs-12">
+                            <p>Laissez libre court à votre imagination en 140 caratères.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-group col-md-6 col-md-offset-3 col-sm-6 col-xs-12">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input type="text" id="message_author" name="message_author" ng-model="msg.message_author" placeholder="Votre nom" class="form-control" required/>
+                        </div>
+                    </div>
+                    <br/>
+
+                    <div class="row">
+                        <div class="input-group col-md-6 col-md-offset-3 col-sm-6 col-xs-12">
+                            <span class="input-group-addon">@</span>
+                            <input type="text" id="message_author_twitter" name="message_author_twitter" ng-model="msg.message_author_twitter" placeholder="Votre pseudo twitter" class="form-control" />
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 col-sm-6  col-xs-12">
+                            <textarea name="message_text" ng-model="msg.message_text" ng-trim="false" maxlenght="140" id="message_text" maxlength="140" rows="4" cols="35" class="form-control col-md-6" required>Votre message...</textarea>
+                            <span class="help-block text-right">Nombre de caractères: {{ 140 - msg.message_text.length}}.</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <button type="submit" ng-disabled="messageForm.$invalid" class="btn btn-default" ng-click="addMessage(msg)">Envoyer</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Messages List -->
+        <div class="messages-list" id="messages-list">
+            <div ng-repeat="msg in messages_displayed | orderBy:order_message" class="msg row">
+                <div class="col-md-12">
+                    <div class="msg-body">
+                        <p>{{msg.message_text}}</p>
+                    </div>
+                    <div class="msg-meta text-right">
+                        <p>Ecrit par {{msg.message_author}}, le {{msg.message_date | dateToISO | date: 'dd/MM/yyyy'}}.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row text-center bottom-actions">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-lg" ng-click="moreMsg()" ng-class="{disabled: isMoreMsg()}">En voir plus&nbsp;
+                    <i class="fa fa-angle-double-right"></i>
+                </button>
+                <div class="btn btn-lg">{{nb_total_messages}} messages total</div>
+                <button type="button" class="btn btn-lg">Retourner en haut</button>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

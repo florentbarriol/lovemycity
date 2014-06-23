@@ -1,0 +1,41 @@
+<nav class="navbar navbar-static-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <h1 class="brand ">
+                <a href="#">I
+                    <i class="fa fa-heart"></i>&nbsp;my city</a>
+            </h1>
+            <ul class="nav navbar-nav">
+                <li ng-class="{active: isActive('/main')}">
+                    <a href="#">Accueil</a>
+                </li>
+                <li ng-class="{active: isActive('/about')}">
+                    <a href="#/apropos">A propos</a>
+                </li>
+                <li ng-class="{active: isActive('/contact')}">
+                    <a href="#/contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<header class="home shadow-inset">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-6 col-md-offset-3 col-xs-12">
+                <h2 class="text-shadow">A propos</h2>
+                <p class="small text-shadow">Nous vous proposons de poster des messages sur votre ville pour montrer l'amour que vous lui porter.</p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="main">
+    <div class="container">
+        <div class="row">
+            <h3>Informations</h3>
+            <p>L'application <span class="cursive-font"><em>"I&nbsp;<i class="fa fa-heart"></i>My City"</em></span> est une démonstration de mes compétences en AngularJS. A noter que l'application ne respecte pas l'architecture MVC, dans une prochaine elle le respectera. L'application n'est pas prévu pour une utilisation massive par des utilisateurs pour l'instant. Si vous rencontrez un problème ou souhaitez des informations sur cette application, n'hésitez pas, à <a href="#/contact">me contacter</a>.</p>
+        </div>
+
+    </div>
+</div>

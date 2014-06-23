@@ -1,0 +1,1 @@
+var loveMyCityAnimations = angular.module('loveMyCityAnimations', ['ngAnimate']);
